@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cute AR Buddy</title>
+
+  <!-- AR.js + Three.js -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ar.js@3.4.5/three/build/ar-threex.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: black;
+    }
+    #hint {
+      position: fixed;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+      color: white;
+      font-family: sans-serif;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="hint">Point camera at the marker</div>
+  <script src="app.js"></script>
+</body>
+</html>
