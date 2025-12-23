@@ -1,33 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Cute AR Buddy</title>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Cute Web AR</title>
 
-  <!-- AR.js + Three.js -->
-  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/ar.js@3.4.5/three/build/ar-threex.min.js"></script>
+    <!-- A-Frame -->
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
 
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-      background: black;
-    }
-    #hint {
-      position: fixed;
-      bottom: 20px;
-      width: 100%;
-      text-align: center;
-      color: white;
-      font-family: sans-serif;
-      opacity: 0.8;
-    }
-  </style>
-</head>
+    <!-- AR.js for A-Frame -->
+    <script src="https://cdn.jsdelivr.net/npm/ar.js@3.4.5/aframe/build/aframe-ar.min.js"></script>
 
-<body>
-  <div id="hint">Point camera at the marker</div>
-  <script src="app.js"></script>
-</body>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+      #hint {
+        position: fixed;
+        bottom: 20px;
+        width: 100%;
+        text-align: center;
+        color: white;
+        font-family: sans-serif;
+        z-index: 999;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="hint">Point camera at the Hiro marker</div>
+
+    <a-scene
+      embedded
+      arjs="sourceType: webcam; debugUIEnabled: false;"
+      renderer="logarithmicDepthBuffer: true;"
+    >
+      <!-- Marker -->
+      <a-marker preset="hiro">
+        <!-- Cute cube -->
+        <a-box
+          position="0 0.5 0"
+          rotation="0 45 0"
+          color="#66ccff"
+          animation="property: rotation; to: 0 405 0; loop: true; dur: 4000"
+        ></a-box>
+      </a-marker>
+
+      <!-- Camera -->
+      <a-entity camera></a-entity>
+    </a-scene>
+  </body>
 </html>
