@@ -1,53 +1,74 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Cute Web AR</title>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cute Web AR</title>
 
-    <!-- A-Frame -->
-    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ar.js@3.4.5/aframe/build/aframe-ar.min.js"></script>
 
-    <!-- AR.js for A-Frame -->
-    <script src="https://cdn.jsdelivr.net/npm/ar.js@3.4.5/aframe/build/aframe-ar.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: black;
+    }
 
-    <style>
-      body {
-        margin: 0;
-        overflow: hidden;
-      }
-      #hint {
-        position: fixed;
-        bottom: 20px;
-        width: 100%;
-        text-align: center;
-        color: white;
-        font-family: sans-serif;
-        z-index: 999;
-      }
-    </style>
-  </head>
+    #startBtn {
+      position: fixed;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 16px 24px;
+      font-size: 18px;
+      z-index: 9999;
+      border-radius: 8px;
+      border: none;
+    }
 
-  <body>
-    <div id="hint">Point camera at the Hiro marker</div>
+    #hint {
+      position: fixed;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+      color: white;
+      z-index: 9999;
+    }
 
-    <a-scene
-      embedded
-      arjs="sourceType: webcam; debugUIEnabled: false;"
-      renderer="logarithmicDepthBuffer: true;"
-    >
-      <!-- Marker -->
-      <a-marker preset="hiro">
-        <!-- Cute cube -->
-        <a-box
-          position="0 0.5 0"
-          rotation="0 45 0"
-          color="#66ccff"
-          animation="property: rotation; to: 0 405 0; loop: true; dur: 4000"
-        ></a-box>
-      </a-marker>
+    a-scene {
+      display: none;
+    }
+  </style>
+</head>
 
-      <!-- Camera -->
-      <a-entity camera></a-entity>
-    </a-scene>
-  </body>
+<body>
+  <button id="startBtn">Start AR</button>
+  <div id="hint">Tap Start → allow camera → show marker</div>
+
+  <a-scene
+    embedded
+    arjs="sourceType: webcam; debugUIEnabled: false;"
+    renderer="logarithmicDepthBuffer: true;"
+  >
+    <a-marker preset="hiro">
+      <a-box
+        position="0 0.5 0"
+        color="#66ccff"
+        animation="property: rotation; to: 0 360 0; loop: true; dur: 4000"
+      ></a-box>
+    </a-marker>
+
+    <a-entity camera></a-entity>
+  </a-scene>
+
+  <script>
+    const btn = document.getElementById('startBtn')
+    const scene = document.querySelector('a-scene')
+
+    btn.addEventListener('click', () => {
+      btn.style.display = 'none'
+      scene.style.display = 'block'
+    })
+  </script>
+</body>
 </html>
